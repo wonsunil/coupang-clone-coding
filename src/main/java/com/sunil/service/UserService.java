@@ -49,4 +49,36 @@ public class UserService {
     public void deleteUser(int userId) {
         this.userRepository.deleteById(userId);
     };
+
+    public void initializeUsers() {
+        User user1 = User.builder()
+                .email("email@email.com")
+                .password("1234")
+                .name("example")
+                .phone("01012345678")
+                .imageUrl("/basic_img.png")
+                .build();
+
+        User user2 = User.builder()
+                .email("example@naver.com")
+                .password("12345")
+                .name("mr. sample")
+                .phone("01087654321")
+                .imageUrl("/basic_img.png")
+                .build();
+
+        User user3 = User.builder()
+                .email("test@gmail.com")
+                .password("test")
+                .name("mr. test")
+                .phone("01015978426")
+                .imageUrl("/basic_img.png")
+                .build();
+
+        this.userRepository.save(user1);
+        this.userRepository.save(user2);
+        this.userRepository.save(user3);
+
+        this.userRepository.flush();
+    };
 };
