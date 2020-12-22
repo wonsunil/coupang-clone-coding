@@ -1,6 +1,6 @@
-package com.sunil.springshoppigmall.repository;
+package com.sunil.repository;
 
-import com.sunil.springshoppigmall.model.Coupon;
+import com.sunil.model.Coupon;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CouponRepository extends JpaRepository<Coupon, Integer> {

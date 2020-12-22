@@ -1,6 +1,6 @@
-package com.sunil.springshoppigmall.repository;
+package com.sunil.repository;
 
-import com.sunil.springshoppigmall.model.Review;
+import com.sunil.model.Review;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ReviewRepository extends JpaRepository<Review, Integer> {

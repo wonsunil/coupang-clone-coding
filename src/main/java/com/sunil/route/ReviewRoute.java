@@ -1,10 +1,10 @@
-package com.sunil.springshoppigmall.route;
+package com.sunil.route;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/product")
-public class ProductRoute {
+@RequestMapping("/review")
+public class ReviewRoute {
 
 };

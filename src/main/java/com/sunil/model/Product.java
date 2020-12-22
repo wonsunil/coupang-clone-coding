@@ -1,4 +1,4 @@
-package com.sunil.springshoppigmall.model;
+package com.sunil.model;
 
 import lombok.Builder;
 import lombok.Getter;

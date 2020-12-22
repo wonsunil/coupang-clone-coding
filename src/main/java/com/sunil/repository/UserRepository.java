@@ -1,6 +1,6 @@
-package com.sunil.springshoppigmall.repository;
+package com.sunil.repository;
 
-import com.sunil.springshoppigmall.model.User;
+import com.sunil.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
