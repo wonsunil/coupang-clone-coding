@@ -5,11 +5,13 @@ import com.sunil.datamodel.vo.ProductRegisterVO;
 import com.sunil.model.Product;
 import com.sunil.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Controller
 public class ProductService {
     private final ProductRepository productRepository;
 
