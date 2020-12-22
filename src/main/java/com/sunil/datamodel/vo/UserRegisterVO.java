@@ -8,7 +8,6 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class UserRegisterVO {
-    private int userId;
     private String email;
     private String password;
     private String name;
@@ -18,8 +17,8 @@ public class UserRegisterVO {
     @Override
     public String toString() {
         return String.format(
-                "UserRegisterVO[userId=%d, email='%s', name='%s', phone='%s', image='%s']",
-                this.userId, this.email, this.name, this.phone, this.imageUrl
+                "UserRegisterVO[email='%s', name='%s', phone='%s', image='%s']",
+                this.email, this.name, this.phone, this.imageUrl
         );
     };
 };

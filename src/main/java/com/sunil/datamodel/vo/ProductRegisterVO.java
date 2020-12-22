@@ -8,7 +8,6 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class ProductRegisterVO {
-    private int productId;
     private int categoryId;
     private int sellerId;
     private String name;
@@ -20,8 +19,8 @@ public class ProductRegisterVO {
     @Override
     public String toString() {
         return String.format(
-                "ProductRegisterVO[productId=%d, categoryId=%d, sellerId=%d, name='%s', amount=%d, price=%d, imageUrl='%s']",
-                this.productId, this.categoryId, this.sellerId, this.name, this.amount, this.price, this.imageUrl
+                "ProductRegisterVO[categoryId=%d, sellerId=%d, name='%s', amount=%d, price=%d, imageUrl='%s']",
+                this.categoryId, this.sellerId, this.name, this.amount, this.price, this.imageUrl
         );
     };
 };

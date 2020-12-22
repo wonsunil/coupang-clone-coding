@@ -10,7 +10,6 @@ import java.util.Date;
 @Setter
 @AllArgsConstructor
 public class SalePurchaseVO {
-    private int saleId;
     private int buyerId;
     private int productId;
     private String name;
@@ -21,8 +20,8 @@ public class SalePurchaseVO {
     @Override
     public String toString() {
         return String.format(
-                "SaleRegisterVO[saleId=%d, buryerId=%d, productId=%d, name='%s', price=%d, saleDate='%s', sold=%d]",
-                this.saleId, this.buyerId, this.productId, this.name, this.price, this.saleDate, this.sold
+                "SaleRegisterVO[buyerId=%d, productId=%d, name='%s', price=%d, saleDate='%s', sold=%d]",
+                this.buyerId, this.productId, this.name, this.price, this.saleDate, this.sold
         );
     };
 };

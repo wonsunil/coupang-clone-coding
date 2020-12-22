@@ -10,7 +10,6 @@ import java.util.Date;
 @Setter
 @AllArgsConstructor
 public class CouponRegisterVO {
-    private int couponId;
     private int userId;
     private Date issuedDate;
     private Date endDate;
@@ -21,8 +20,8 @@ public class CouponRegisterVO {
     @Override
     public String toString() {
         return String.format(
-                "CouponRegisterVO[couponId=%d, userId=%d, issuedDate='%s', endDate='%s', discountPrice=%d, discountPercentage=%d, used = %d]",
-                this.couponId, this.userId, this.issuedDate, this.endDate, this.discountPrice, this.discountPercentage, this.used
+                "CouponRegisterVO[userId=%d, issuedDate='%s', endDate='%s', discountPrice=%d, discountPercentage=%d, used = %d]",
+                this.userId, this.issuedDate, this.endDate, this.discountPrice, this.discountPercentage, this.used
         );
     };
 };
