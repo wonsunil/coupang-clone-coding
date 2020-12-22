@@ -79,7 +79,7 @@ public class ProductService {
         this.productRepository.flush();
     };
 
-    public void deleteUser(int productId) {
+    public void deleteProduct(int productId) {
         this.productRepository.deleteById(productId);
     };
 };
