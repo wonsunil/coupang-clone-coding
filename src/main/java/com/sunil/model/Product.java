@@ -36,10 +36,6 @@ public class Product {
     @Column
     private float rate;
 
-    @OneToMany
-    @JoinColumn(name = "productId")
-    private Collection<Review> reviews;
-
     @Builder
     public Product(int categoryId, int sellerId, String name, int amount, int price, String imageUrl) {
         this.categoryId = categoryId;
