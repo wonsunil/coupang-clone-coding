@@ -16,7 +16,6 @@ public class Product {
     private int productId;
 
     @Column(nullable = false)
-    @JoinColumn(name = "categoryId")
     private int categoryId;
 
     @Column(nullable = false)
@@ -36,10 +35,6 @@ public class Product {
 
     @Column
     private float rate;
-
-    @OneToMany
-    @JoinColumn(name = "productId")
-    private Collection<Review> reviews;
 
     @Builder
     public Product(int categoryId, int sellerId, String name, int amount, int price, String imageUrl) {
