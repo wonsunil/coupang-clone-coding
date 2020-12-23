@@ -20,6 +20,11 @@ public class SaleRoute {
         this.saleService = saleService;
     };
 
+    @GetMapping("/initialize")
+    public void initialize() {
+        this.saleService.initializeSales();
+    };
+
     @GetMapping("")
     public List<SaleDTO> getSales() {
         return this.saleService.sales();
