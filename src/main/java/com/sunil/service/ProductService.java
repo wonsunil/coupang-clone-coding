@@ -31,14 +31,8 @@ public class ProductService {
         ReviewGroupByProductId reviewRateGroupData = this.productRepository.getReviewRateByProductId(productId);
 
         if(reviewCountGroupData != null) {
-            ProductTotalReviewCount reviewCount = new ProductTotalReviewCount(reviewCountGroupData);
-            ProductTotalReviewRate reviewRate = new ProductTotalReviewRate(reviewRateGroupData);
-
-            Optional<ProductTotalReviewCount> reviewTotalReviewCount = Optional.ofNullable(reviewCount);
-            Optional<ProductTotalReviewRate> reviewTotalRate = Optional.ofNullable(reviewRate);
-
-            product.setReviews(reviewTotalReviewCount.get().getTotalReviewCount());
-            product.setRate(reviewTotalRate.get().getTotalRate());
+            product.setReviews(new ProductTotalReviewCount(reviewCountGroupData).getTotalReviewCount());
+            product.setRate(new ProductTotalReviewRate(reviewRateGroupData).getTotalRate());
         }else {
             product.setReviews(0);
             product.setRate((float) 0.0);
@@ -55,14 +49,8 @@ public class ProductService {
             ReviewGroupByProductId reviewRateGroupData = this.productRepository.getReviewRateByProductId(product.getProductId());
 
             if(reviewCountGroupData != null) {
-                ProductTotalReviewCount reviewCount = new ProductTotalReviewCount(reviewCountGroupData);
-                ProductTotalReviewRate reviewRate = new ProductTotalReviewRate(reviewRateGroupData);
-
-                Optional<ProductTotalReviewCount> reviewTotalReviewCount = Optional.ofNullable(reviewCount);
-                Optional<ProductTotalReviewRate> reviewTotalRate = Optional.ofNullable(reviewRate);
-
-                product.setReviews(reviewTotalReviewCount.get().getTotalReviewCount());
-                product.setRate(reviewTotalRate.get().getTotalRate());
+                product.setReviews(new ProductTotalReviewCount(reviewCountGroupData).getTotalReviewCount());
+                product.setRate(new ProductTotalReviewRate(reviewRateGroupData).getTotalRate());
             }else {
                 product.setReviews(0);
                 product.setRate((float) 0.0);
