@@ -1,7 +1,6 @@
 package com.sunil.route;
 
 import com.sunil.datamodel.dto.ProductDTO;
-import com.sunil.datamodel.productsByCategoryId;
 import com.sunil.datamodel.dto.CategoryDTO;
 import com.sunil.datamodel.vo.CategoryRegisterVO;
 import com.sunil.service.CategoryService;
