@@ -1,5 +1,8 @@
 package com.sunil.service;
 
+import com.sunil.datamodel.ProductTotalReviewCount;
+import com.sunil.datamodel.ProductTotalReviewRate;
+import com.sunil.datamodel.ReviewGroupByProductId;
 import com.sunil.datamodel.dto.ProductDTO;
 import com.sunil.datamodel.vo.ProductRegisterVO;
 import com.sunil.model.Product;
@@ -24,11 +27,22 @@ public class ProductService {
         Optional<Product> searchedProduct = this.productRepository.findById(productId);
         ProductDTO product = new ProductDTO(searchedProduct.orElseThrow(() -> new Exception("존재하지 않는 상품 아이디입니다")));
 
-        Optional<Float> rate = Optional.ofNullable(this.productRepository.getRateByProductId(productId));
-        Optional<Integer> reviewCount = Optional.ofNullable(this.productRepository.getReviewCountByProductId(productId));
+        ReviewGroupByProductId reviewCountGroupData = this.productRepository.getReviewCountByProductId(productId);
+        ReviewGroupByProductId reviewRateGroupData = this.productRepository.getReviewRateByProductId(productId);
 
-        product.setRate(rate.orElse((float) 0.0));
-        product.setReviews(reviewCount.orElse(0));
+        if(reviewCountGroupData != null) {
+            ProductTotalReviewCount reviewCount = new ProductTotalReviewCount(reviewCountGroupData);
+            ProductTotalReviewRate reviewRate = new ProductTotalReviewRate(reviewRateGroupData);
+
+            Optional<ProductTotalReviewCount> reviewTotalReviewCount = Optional.ofNullable(reviewCount);
+            Optional<ProductTotalReviewRate> reviewTotalRate = Optional.ofNullable(reviewRate);
+
+            product.setReviews(reviewTotalReviewCount.get().getTotalReviewCount());
+            product.setRate(reviewTotalRate.get().getTotalRate());
+        }else {
+            product.setReviews(0);
+            product.setRate((float) 0.0);
+        };
 
         return product;
     };
@@ -37,11 +51,22 @@ public class ProductService {
         List<ProductDTO> products = this.productRepository.findAll().stream().map(ProductDTO::new).collect(Collectors.toList());
 
         for(ProductDTO product : products) {
-            Optional<Float> rate = Optional.ofNullable(this.productRepository.getRateByProductId(product.getProductId()));
-            Optional<Integer> reviewCount = Optional.ofNullable(this.productRepository.getReviewCountByProductId(product.getProductId()));
+            ReviewGroupByProductId reviewCountGroupData = this.productRepository.getReviewCountByProductId(product.getProductId());
+            ReviewGroupByProductId reviewRateGroupData = this.productRepository.getReviewRateByProductId(product.getProductId());
 
-            product.setRate(rate.orElse((float) 0.0));
-            product.setReviews(reviewCount.orElse(0));
+            if(reviewCountGroupData != null) {
+                ProductTotalReviewCount reviewCount = new ProductTotalReviewCount(reviewCountGroupData);
+                ProductTotalReviewRate reviewRate = new ProductTotalReviewRate(reviewRateGroupData);
+
+                Optional<ProductTotalReviewCount> reviewTotalReviewCount = Optional.ofNullable(reviewCount);
+                Optional<ProductTotalReviewRate> reviewTotalRate = Optional.ofNullable(reviewRate);
+
+                product.setReviews(reviewTotalReviewCount.get().getTotalReviewCount());
+                product.setRate(reviewTotalRate.get().getTotalRate());
+            }else {
+                product.setReviews(0);
+                product.setRate((float) 0.0);
+            };
         };
 
         return products;
