@@ -22,8 +22,13 @@ public class ProductService {
 
     public ProductDTO productByProductId(int productId) throws Exception{
         Optional<Product> searchedProduct = this.productRepository.findById(productId);
+        ProductDTO product = new ProductDTO(searchedProduct.orElseThrow(() -> new Exception("존재하지 않는 상품 아이디입니다")));
 
-        return new ProductDTO(searchedProduct.orElseThrow(() -> new Exception("존재하지 않는 상품 아이디입니다")));
+        Optional<Float> rate = Optional.ofNullable(this.productRepository.getRateByProductId(productId));
+
+        product.setRate(rate.orElse((float) 0.0));
+
+        return product;
     };
 
     public List<ProductDTO> products() {
