@@ -27,21 +27,18 @@ public class ProductService {
         Optional<Product> searchedProduct = this.productRepository.findById(productId);
         ProductDTO product = new ProductDTO(searchedProduct.orElseThrow(() -> new Exception("존재하지 않는 상품 아이디입니다")));
 
-        ReviewGroupByProductId reviewCountGroupData = this.productRepository.getReviewCountByProductId(productId);
-        ReviewGroupByProductId reviewRateGroupData = this.productRepository.getReviewRateByProductId(productId);
-
-        this.setting(product, reviewCountGroupData, reviewRateGroupData);
+        this.productSetting(product);
 
         return product;
     };
 
-    public void setting(ProductDTO product,
-                              ReviewGroupByProductId count,
-                              ReviewGroupByProductId rate
-    ) {
-        if(count != null) {
-            product.setReviews(new ProductTotalReviewCount(count).getTotalReviewCount());
-            product.setRate(new ProductTotalReviewRate(rate).getTotalRate());
+    public void productSetting(ProductDTO product) {
+        ReviewGroupByProductId countGroup = this.productRepository.getReviewCountByProductId(product.getProductId());
+        ReviewGroupByProductId rateGroup = this.productRepository.getReviewRateByProductId(product.getProductId());
+
+        if(countGroup != null) {
+            product.setReviews(new ProductTotalReviewCount(countGroup).getTotalReviewCount());
+            product.setRate(new ProductTotalReviewRate(rateGroup).getTotalRate());
         }else {
             product.setReviews(0);
             product.setRate((float) 0.0);
@@ -52,10 +49,7 @@ public class ProductService {
         List<ProductDTO> products = this.productRepository.findAll().stream().map(ProductDTO::new).collect(Collectors.toList());
 
         for(ProductDTO product : products) {
-            ReviewGroupByProductId reviewCountGroupData = this.productRepository.getReviewCountByProductId(product.getProductId());
-            ReviewGroupByProductId reviewRateGroupData = this.productRepository.getReviewRateByProductId(product.getProductId());
-
-            this.setting(product, reviewCountGroupData, reviewRateGroupData);
+            this.productSetting(product);
         };
 
         return products;
