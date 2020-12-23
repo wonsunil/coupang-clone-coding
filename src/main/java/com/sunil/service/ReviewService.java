@@ -31,12 +31,12 @@ public class ReviewService {
         return this.reviewRepository.findAll().stream().map(ReviewDTO::new).collect(Collectors.toList());
     };
 
-    public int createReview(ReviewRegisterVO review) {
+    public int createReview(ReviewRegisterVO reviewRegisterVO) {
         Review createReview = Review.builder()
-                .userId(1)
-                .productId(1)
-                .content("정말 잘 쓰고 있어요!")
-                .rate((float) 5.0)
+                .userId(reviewRegisterVO.getUserId())
+                .productId(reviewRegisterVO.getProductId())
+                .content(reviewRegisterVO.getContent())
+                .rate(reviewRegisterVO.getRate())
                 .reviewDate(new Date())
                 .build();
 
