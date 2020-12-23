@@ -43,7 +43,7 @@ public class ShoppingService {
         return total;
     };
 
-    public String addProductShoppingList(ShoppingRegisterVO shopping) {
+    public int addProductShoppingList(ShoppingRegisterVO shopping) {
         Shopping product = Shopping.builder()
                 .userId(shopping.getUserId())
                 .amount(shopping.getAmount())
@@ -53,7 +53,7 @@ public class ShoppingService {
         this.shoppingRepository.save(product);
         this.shoppingRepository.flush();
 
-        return "성공적으로 추가되었습니다!";
+        return product.getBasketId();
     };
 
     public void deleteProductFromShoppingList(int userId, int productId) {
