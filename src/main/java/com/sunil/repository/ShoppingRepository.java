@@ -10,6 +10,7 @@ import java.util.List;
 
 @Repository
 public interface ShoppingRepository extends JpaRepository<Shopping, Integer> {
+    public Shopping findShoppingByUserIdAndProductId(int userId, int productId);
     public List<Shopping> findByUserId(int userId);
 
     @Query(value = "SELECT S.PRODUCT_ID, P.NAME, SUM(? * P.PRICE) as totalPrice " +
@@ -18,6 +19,4 @@ public interface ShoppingRepository extends JpaRepository<Shopping, Integer> {
                    "GROUP BY S.PRODUCT_ID, P.NAME"
             , nativeQuery = true)
     public ShoppingGroupByUserId totalPrice(int amount, int userId);
-
-    public void deleteByUserIdAndProductId(int userId, int productId);
 };

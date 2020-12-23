@@ -57,6 +57,8 @@ public class ShoppingService {
     };
 
     public void deleteProductFromShoppingList(int userId, int productId) {
-        this.shoppingRepository.deleteByUserIdAndProductId(userId, productId);
+        int basketId = this.shoppingRepository.findShoppingByUserIdAndProductId(userId, productId).getBasketId();
+
+        this.shoppingRepository.deleteById(basketId);
     };
 }
