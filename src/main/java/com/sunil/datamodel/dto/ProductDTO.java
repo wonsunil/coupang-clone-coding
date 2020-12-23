@@ -20,7 +20,7 @@ public class ProductDTO {
     private int price;
     private String imageUrl;
     private float rate;
-    private Collection<Review> reviews;
+    private int reviews;
 
     public ProductDTO(Product product) {
         this.productId = product.getProductId();
@@ -30,13 +30,14 @@ public class ProductDTO {
         this.amount = product.getAmount();
         this.price = product.getPrice();
         this.imageUrl = product.getImageUrl();
+        this.reviews = product.getReviews();
     };
 
     @Override
     public String toString() {
         return String.format(
-                "ProductDTO[productId=%d, categoryId=%d, sellerId=%d, name='%s', amount=%d, price=%d, imageUrl='%s']",
-                this.productId, this.categoryId, this.sellerId, this.name, this.amount, this.price, this.imageUrl
+                "ProductDTO[productId=%d, categoryId=%d, sellerId=%d, name='%s', amount=%d, price=%d, imageUrl='%s', reviews=%d]",
+                this.productId, this.categoryId, this.sellerId, this.name, this.amount, this.price, this.imageUrl, this.reviews
         );
     };
 };

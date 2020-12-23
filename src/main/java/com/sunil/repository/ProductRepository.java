@@ -14,4 +14,10 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
                     "FROM REVIEW WHERE PRODUCT_ID = ? GROUP BY PRODUCT_ID",
             nativeQuery = true)
     public Float getRateByProductId(int productId);
+
+    @Query(value =
+            "SELECT PRODUCT_ID, COUNT(*) as totalReviewCount " +
+                    "FROM REVIEW WHERE PRODUCT_ID = ? GROUP BY PRODUCT_ID",
+            nativeQuery = true)
+    public Integer getReviewCountByProductId(int productId);
 };

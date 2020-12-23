@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Collection;
 
 @Getter
 @Entity
@@ -36,21 +35,25 @@ public class Product {
     @Column
     private float rate;
 
+    @Column
+    private int reviews;
+
     @Builder
-    public Product(int categoryId, int sellerId, String name, int amount, int price, String imageUrl) {
+    public Product(int categoryId, int sellerId, String name, int amount, int price, String imageUrl, int reviews) {
         this.categoryId = categoryId;
         this.sellerId = sellerId;
         this.name = name;
         this.amount = amount;
         this.price = price;
         this.imageUrl = imageUrl;
+        this.reviews = reviews;
     };
 
     @Override
     public String toString() {
         return String.format(
-                "Product[productId=%d, categoryId=%d, sellerId=%d, name='%s', amount=%d, price=%d, imageUrl='%s']",
-                this.productId, this.categoryId, this.sellerId, this.name, this.amount, this.price, this.imageUrl
+                "Product[productId=%d, categoryId=%d, sellerId=%d, name='%s', amount=%d, price=%d, imageUrl='%s', reviews=%d]",
+                this.productId, this.categoryId, this.sellerId, this.name, this.amount, this.price, this.imageUrl, this.reviews
         );
     };
 };
