@@ -30,15 +30,22 @@ public class ProductService {
         ReviewGroupByProductId reviewCountGroupData = this.productRepository.getReviewCountByProductId(productId);
         ReviewGroupByProductId reviewRateGroupData = this.productRepository.getReviewRateByProductId(productId);
 
-        if(reviewCountGroupData != null) {
-            product.setReviews(new ProductTotalReviewCount(reviewCountGroupData).getTotalReviewCount());
-            product.setRate(new ProductTotalReviewRate(reviewRateGroupData).getTotalRate());
+        this.setting(product, reviewCountGroupData, reviewRateGroupData);
+
+        return product;
+    };
+
+    public void setting(ProductDTO product,
+                              ReviewGroupByProductId count,
+                              ReviewGroupByProductId rate
+    ) {
+        if(count != null) {
+            product.setReviews(new ProductTotalReviewCount(count).getTotalReviewCount());
+            product.setRate(new ProductTotalReviewRate(rate).getTotalRate());
         }else {
             product.setReviews(0);
             product.setRate((float) 0.0);
         };
-
-        return product;
     };
 
     public List<ProductDTO> products() {
@@ -48,13 +55,7 @@ public class ProductService {
             ReviewGroupByProductId reviewCountGroupData = this.productRepository.getReviewCountByProductId(product.getProductId());
             ReviewGroupByProductId reviewRateGroupData = this.productRepository.getReviewRateByProductId(product.getProductId());
 
-            if(reviewCountGroupData != null) {
-                product.setReviews(new ProductTotalReviewCount(reviewCountGroupData).getTotalReviewCount());
-                product.setRate(new ProductTotalReviewRate(reviewRateGroupData).getTotalRate());
-            }else {
-                product.setReviews(0);
-                product.setRate((float) 0.0);
-            };
+            this.setting(product, reviewCountGroupData, reviewRateGroupData);
         };
 
         return products;
