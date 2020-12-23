@@ -1,5 +1,7 @@
 package com.sunil.route;
 
+import com.sunil.datamodel.dto.ProductDTO;
+import com.sunil.datamodel.productsByCategoryId;
 import com.sunil.datamodel.dto.CategoryDTO;
 import com.sunil.datamodel.vo.CategoryRegisterVO;
 import com.sunil.service.CategoryService;
@@ -41,5 +43,10 @@ public class CategoryRoute {
     @DeleteMapping("/{categoryId}")
     public void deleteCategory(@PathVariable(value = "categoryId") String categoryId) {
         this.categoryService.deleteCategory(Integer.parseInt(categoryId));
+    };
+
+    @GetMapping("/{categoryId}/products")
+    public List<ProductDTO> productsByCategory(@PathVariable(value = "categoryId") String categoryId) throws Exception {
+        return this.categoryService.productsByCategory(Integer.parseInt(categoryId));
     };
 };
