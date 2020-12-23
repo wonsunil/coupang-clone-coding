@@ -16,7 +16,6 @@ public class Product {
     private int productId;
 
     @Column(nullable = false)
-    @JoinColumn(name = "categoryId")
     private int categoryId;
 
     @Column(nullable = false)
