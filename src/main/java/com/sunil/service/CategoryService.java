@@ -1,9 +1,11 @@
 package com.sunil.service;
 
+import com.sunil.datamodel.dto.ProductDTO;
 import com.sunil.datamodel.dto.CategoryDTO;
 import com.sunil.datamodel.vo.CategoryRegisterVO;
 import com.sunil.model.Category;
 import com.sunil.repository.CategoryRepository;
+import com.sunil.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -14,10 +16,12 @@ import java.util.stream.Collectors;
 @Controller
 public class CategoryService {
     private CategoryRepository categoryRepository;
+    private final ProductRepository productRepository;
 
     @Autowired
-    public CategoryService(CategoryRepository categoryRepository) {
+    public CategoryService(CategoryRepository categoryRepository, ProductRepository productRepository) {
         this.categoryRepository = categoryRepository;
+        this.productRepository = productRepository;
     };
 
     public CategoryDTO categoryById(int categoryId) throws Exception{
@@ -73,5 +77,9 @@ public class CategoryService {
         this.categoryRepository.save(category5);
 
         this.categoryRepository.flush();
+    };
+
+    public List<ProductDTO> productsByCategory(int categoryId) {
+        return this.productRepository.findByCategoryId(categoryId).stream().map(ProductDTO::new).collect(Collectors.toList());
     };
 };
