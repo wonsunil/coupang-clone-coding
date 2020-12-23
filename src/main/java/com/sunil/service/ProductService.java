@@ -34,7 +34,17 @@ public class ProductService {
     };
 
     public List<ProductDTO> products() {
-        return this.productRepository.findAll().stream().map(ProductDTO::new).collect(Collectors.toList());
+        List<ProductDTO> products = this.productRepository.findAll().stream().map(ProductDTO::new).collect(Collectors.toList());
+
+        for(ProductDTO product : products) {
+            Optional<Float> rate = Optional.ofNullable(this.productRepository.getRateByProductId(product.getProductId()));
+            Optional<Integer> reviewCount = Optional.ofNullable(this.productRepository.getReviewCountByProductId(product.getProductId()));
+
+            product.setRate(rate.orElse((float) 0.0));
+            product.setReviews(reviewCount.orElse(0));
+        };
+
+        return products;
     };
 
     public int createProduct(ProductRegisterVO product) {
