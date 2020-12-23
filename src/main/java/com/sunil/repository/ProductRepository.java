@@ -1,5 +1,6 @@
 package com.sunil.repository;
 
+import com.sunil.datamodel.ReviewGroupByProductId;
 import com.sunil.model.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -10,14 +11,14 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     public List<Product> findByCategoryId(int categoryId);
 
     @Query(value =
-            "SELECT PRODUCT_ID, SUM(RATE) as totalRate " +
+            "SELECT PRODUCT_ID as productId, AVG(RATE) as totalRate " +
                     "FROM REVIEW WHERE PRODUCT_ID = ? GROUP BY PRODUCT_ID",
             nativeQuery = true)
-    public Float getRateByProductId(int productId);
+    public ReviewGroupByProductId getReviewRateByProductId(int productId);
 
     @Query(value =
-            "SELECT PRODUCT_ID, COUNT(*) as totalReviewCount " +
+            "SELECT PRODUCT_ID as productId, COUNT(*) as totalReviewCount " +
                     "FROM REVIEW WHERE PRODUCT_ID = ? GROUP BY PRODUCT_ID",
             nativeQuery = true)
-    public Integer getReviewCountByProductId(int productId);
+    public ReviewGroupByProductId getReviewCountByProductId(int productId);
 };
