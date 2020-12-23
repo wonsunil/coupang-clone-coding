@@ -18,6 +18,11 @@ public class ReviewRoute {
         this.reviewService = reviewService;
     };
 
+    @GetMapping("/initialize")
+    public void initialize() {
+        this.reviewService.initializeReviews();
+    };
+
     @GetMapping("")
     public List<ReviewDTO> getReviews() {
         return this.reviewService.reviews();
