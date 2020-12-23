@@ -67,4 +67,11 @@ public class UserRoute {
     ) {
         this.shoppingService.addProductShoppingList(new ShoppingRegisterVO(Integer.parseInt(userId), amount, Integer.parseInt(productId)));
     };
+
+    @DeleteMapping("/{userId}/shopping-basket/{productId}")
+    public void deleteProductFromShoppingList(@PathVariable(value = "userId") String userId,
+                                              @PathVariable(value = "productId") String productId
+    ) {
+        this.shoppingService.deleteProductFromShoppingList(Integer.parseInt(userId), Integer.parseInt(productId));
+    };
 };
