@@ -12,7 +12,7 @@ import java.util.Date;
 public class SalePurchaseVO {
     private int buyerId;
     private int productId;
-    private String name;
+    private int amount;
     private int price;
     private Date saleDate;
     private int sold;
