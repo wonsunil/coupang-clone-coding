@@ -1,10 +1,9 @@
 package com.sunil.service;
 
-import com.sunil.datamodel.ShoppingGroupByUserId;
-import com.sunil.datamodel.ShoppingTotalPrice;
 import com.sunil.datamodel.dto.ShoppingDTO;
 import com.sunil.datamodel.vo.ShoppingRegisterVO;
 import com.sunil.model.Shopping;
+import com.sunil.repository.ProductRepository;
 import com.sunil.repository.ShoppingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,10 +14,12 @@ import java.util.stream.Collectors;
 @Controller
 public class ShoppingService {
     private final ShoppingRepository shoppingRepository;
+    private final ProductRepository productRepository;
 
     @Autowired
-    public ShoppingService(ShoppingRepository shoppingRepository) {
+    public ShoppingService(ShoppingRepository shoppingRepository, ProductRepository productRepository) {
         this.shoppingRepository = shoppingRepository;
+        this.productRepository = productRepository;
     };
 
     public List<ShoppingDTO> shoppingByUserId(int userId) {
@@ -26,10 +27,20 @@ public class ShoppingService {
     };
 
     public int getTotalPrice(int userId) {
-        ShoppingGroupByUserId groupData = this.shoppingRepository.totalPrice(userId);
-        ShoppingTotalPrice totalPrice = new ShoppingTotalPrice(groupData);
+        List<ShoppingDTO> list = this.shoppingRepository.findByUserId(userId)
+                .stream()
+                .map(ShoppingDTO::new)
+                .collect(Collectors.toList());
 
-        return totalPrice.getTotalPrice();
+        int total = 0;
+
+        for(ShoppingDTO product : list) {
+            int price = this.productRepository.findById(product.getProductId()).get().getPrice();
+
+            total += (price * product.getAmount());
+        }
+
+        return total;
     };
 
     public String addProductShoppingList(ShoppingRegisterVO shopping) {
