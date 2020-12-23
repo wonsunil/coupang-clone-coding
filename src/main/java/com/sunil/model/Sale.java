@@ -1,5 +1,6 @@
 package com.sunil.model;
 
+import com.sunil.datamodel.enumModel.SaleStatus;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,7 +32,7 @@ public class Sale {
     private Date saleDate;
 
     @Column
-    private int sold;
+    private SaleStatus sold;
 
     @Builder
     public Sale(int buyerId, int productId, int amount, int price, Date saleDate, SaleStatus sold) {

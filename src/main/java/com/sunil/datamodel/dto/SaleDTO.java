@@ -1,5 +1,6 @@
 package com.sunil.datamodel.dto;
 
+import com.sunil.datamodel.enumModel.SaleStatus;
 import com.sunil.model.Sale;
 import lombok.AllArgsConstructor;
 import lombok.Setter;
@@ -17,7 +18,7 @@ public class SaleDTO {
     private int amount;
     private int price;
     private Date saleDate;
-    private int sold;
+    private SaleStatus sold;
 
     public SaleDTO(Sale sale) {
         this.saleId = sale.getSaleId();
