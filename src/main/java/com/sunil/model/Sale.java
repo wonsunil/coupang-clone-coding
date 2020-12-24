@@ -29,13 +29,13 @@ public class Sale {
     private int price;
 
     @Column
-    private Date saleDate;
+    private String saleDate;
 
     @Column
     private SaleStatus sold;
 
     @Builder
-    public Sale(int buyerId, int productId, int amount, int price, Date saleDate, SaleStatus sold) {
+    public Sale(int buyerId, int productId, int amount, int price, String saleDate, SaleStatus sold) {
         this.buyerId = buyerId;
         this.productId = productId;
         this.amount = amount;

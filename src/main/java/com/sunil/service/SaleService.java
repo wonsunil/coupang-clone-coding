@@ -10,6 +10,7 @@ import com.sunil.repository.SaleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -82,13 +83,17 @@ public class SaleService {
         return createSale.getSaleId();
     };
 
+    public void deleteSaleList(int saleId) {
+        this.saleRepository.deleteById(saleId);
+    };
+
     public void initializeSales() {
         Sale sale1 = Sale.builder()
                 .buyerId(1)
                 .productId(1)
                 .amount(1)
                 .price(130000)
-                .saleDate(new Date())
+                .saleDate(new SimpleDateFormat("yyyy-MM-dd").format(new Date()))
                 .sold(SaleStatus.PAID)
                 .build();
 
@@ -97,7 +102,7 @@ public class SaleService {
                 .productId(1)
                 .amount(1)
                 .price(130000)
-                .saleDate(new Date())
+                .saleDate(new SimpleDateFormat("yyyy-MM-dd").format(new Date()))
                 .sold(SaleStatus.PROGRESSING)
                 .build();
 
@@ -106,7 +111,7 @@ public class SaleService {
                 .productId(2)
                 .amount(1)
                 .price(1200000)
-                .saleDate(new Date())
+                .saleDate(new SimpleDateFormat("yyyy-MM-dd").format(new Date()))
                 .sold(SaleStatus.REFUNDED)
                 .build();
 
