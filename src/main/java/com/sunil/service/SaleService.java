@@ -37,7 +37,7 @@ public class SaleService {
         return new SaleDTO(searchedSale.orElseThrow(() -> new Exception("존재하지 않는 구매 기록입니다")));
     };
 
-    public int addSaleList(SalePurchaseVO sale) throws Exception {
+    public int addSaleList(SalePurchaseVO sale) {
         int discountPrice = 0;
 
         int couponId = sale.getCouponId();
@@ -45,13 +45,15 @@ public class SaleService {
         Coupon coupon = this.couponRepository.findById(couponId)
                 .orElse(new Coupon(0, new Date(), new Date(), 0, 0, 0));
 
-        int couponDiscountPrice = coupon.getDiscountPrice();
-        int discountPercentage = coupon.getDiscountPercentage();
+        if(coupon.getEndDate().before(new Date())) {
+            int couponDiscountPrice = coupon.getDiscountPrice();
+            int discountPercentage = coupon.getDiscountPercentage();
 
-        if(couponDiscountPrice != 0 && discountPercentage == 0) {
-            discountPrice = couponDiscountPrice;
-        }else if(couponDiscountPrice == 0 && discountPercentage != 0) {
-            discountPrice = (int)Math.floor(sale.getAmount() + (discountPercentage/100));
+            if(couponDiscountPrice != 0 && discountPercentage == 0) {
+                discountPrice = couponDiscountPrice;
+            }else if(couponDiscountPrice == 0 && discountPercentage != 0) {
+                discountPrice = (int)Math.floor(sale.getAmount() + (discountPercentage/100));
+            };
         };
 
         int sold = sale.getSold();
