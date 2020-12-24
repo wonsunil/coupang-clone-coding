@@ -1,5 +1,6 @@
 package com.sunil.model;
 
+import com.sunil.datamodel.enumModel.SaleStatus;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,7 +23,7 @@ public class Sale {
     private int productId;
 
     @Column
-    private String name;
+    private int amount;
 
     @Column
     private int price;
@@ -31,13 +32,13 @@ public class Sale {
     private Date saleDate;
 
     @Column
-    private int sold;
+    private SaleStatus sold;
 
     @Builder
-    public Sale(int buyerId, int productId, String name, int price, Date saleDate, int sold) {
+    public Sale(int buyerId, int productId, int amount, int price, Date saleDate, SaleStatus sold) {
         this.buyerId = buyerId;
         this.productId = productId;
-        this.name = name;
+        this.amount = amount;
         this.price = price;
         this.saleDate = saleDate;
         this.sold = sold;
@@ -46,8 +47,8 @@ public class Sale {
     @Override
     public String toString() {
         return String.format(
-                "Sale[saleId=%d, buryerId=%d, productId=%d, name='%s', price=%d, saleDate='%s', sold=%d]",
-                this.saleId, this.buyerId, this.productId, this.name, this.price, this.saleDate, this.sold
+                "Sale[saleId=%d, buryerId=%d, productId=%d, amount=%d, price=%d, saleDate='%s', sold=%d]",
+                this.saleId, this.buyerId, this.productId, this.amount, this.price, this.saleDate, this.sold
         );
     };
 };
