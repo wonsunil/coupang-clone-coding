@@ -17,7 +17,7 @@ public class SaleDTO {
     private int productId;
     private int amount;
     private int price;
-    private Date saleDate;
+    private String saleDate;
     private SaleStatus sold;
 
     public SaleDTO(Sale sale) {
