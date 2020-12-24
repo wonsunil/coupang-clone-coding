@@ -82,6 +82,10 @@ public class SaleService {
         return createSale.getSaleId();
     };
 
+    public void deleteSaleList(int saleId) {
+        this.saleRepository.deleteById(saleId);
+    };
+
     public void initializeSales() {
         Sale sale1 = Sale.builder()
                 .buyerId(1)

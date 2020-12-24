@@ -1,12 +1,10 @@
 package com.sunil.route;
 
 import com.sunil.datamodel.dto.SaleDTO;
+import com.sunil.datamodel.vo.SalePurchaseVO;
 import com.sunil.service.SaleService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -33,5 +31,15 @@ public class SaleRoute {
     @GetMapping("/{saleId}")
     public SaleDTO getSaleById(@PathVariable(value = "saleId") String saleId) throws Exception {
         return this.saleService.saleBySaleId(Integer.parseInt(saleId));
+    };
+
+    @PostMapping
+    public int addSaleList(SalePurchaseVO sale) throws Exception {
+        return this.saleService.addSaleList(sale);
+    };
+
+    @DeleteMapping("{saleId}")
+    public void deleteSaleList(@PathVariable(value = "saleId") String saleId) {
+        this.saleService.deleteSaleList(Integer.parseInt(saleId));
     };
 };
