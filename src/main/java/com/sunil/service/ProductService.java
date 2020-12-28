@@ -4,6 +4,7 @@ import com.sunil.datamodel.ProductTotalReviewCount;
 import com.sunil.datamodel.ProductTotalReviewRate;
 import com.sunil.datamodel.ReviewGroupByProductId;
 import com.sunil.datamodel.dto.ProductDTO;
+import com.sunil.datamodel.exception.ControllableException;
 import com.sunil.datamodel.vo.ProductRegisterVO;
 import com.sunil.model.Product;
 import com.sunil.repository.ProductRepository;
@@ -25,7 +26,7 @@ public class ProductService {
 
     public ProductDTO productByProductId(int productId) throws Exception{
         Optional<Product> searchedProduct = this.productRepository.findById(productId);
-        ProductDTO product = new ProductDTO(searchedProduct.orElseThrow(() -> new Exception("존재하지 않는 상품 아이디입니다")));
+        ProductDTO product = new ProductDTO(searchedProduct.orElseThrow(() -> new ControllableException("존재하지 않는 상품 아이디입니다")));
 
         this.productSetting(product);
 

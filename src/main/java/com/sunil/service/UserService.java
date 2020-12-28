@@ -1,6 +1,7 @@
 package com.sunil.service;
 
 import com.sunil.datamodel.dto.UserDTO;
+import com.sunil.datamodel.exception.ControllableException;
 import com.sunil.datamodel.vo.UserRegisterVO;
 import com.sunil.model.User;
 import com.sunil.repository.UserRepository;
@@ -24,7 +25,7 @@ public class UserService {
     public UserDTO userById(int userId) throws Exception{
         Optional<User> searchedUser = this.userRepository.findById(userId);
 
-        return new UserDTO(searchedUser.orElseThrow(() -> new Exception("존재하지 않는 유저 아이디입니다")));
+        return new UserDTO(searchedUser.orElseThrow(() -> new ControllableException("존재하지 않는 유저 아이디입니다")));
     };
 
     public List<UserDTO> users() {

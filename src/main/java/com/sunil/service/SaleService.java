@@ -2,6 +2,7 @@ package com.sunil.service;
 
 import com.sunil.datamodel.dto.SaleDTO;
 import com.sunil.datamodel.enumModel.SaleStatus;
+import com.sunil.datamodel.exception.ControllableException;
 import com.sunil.datamodel.vo.SalePurchaseVO;
 import com.sunil.model.Coupon;
 import com.sunil.model.Sale;
@@ -34,7 +35,7 @@ public class SaleService {
     public SaleDTO saleBySaleId(int saleId) throws Exception {
         Optional<Sale> searchedSale = this.saleRepository.findById(saleId);
 
-        return new SaleDTO(searchedSale.orElseThrow(() -> new Exception("존재하지 않는 구매 기록입니다")));
+        return new SaleDTO(searchedSale.orElseThrow(() -> new ControllableException("존재하지 않는 구매 기록입니다")));
     };
 
     public int addSaleList(SalePurchaseVO sale) {

@@ -1,6 +1,7 @@
 package com.sunil.service;
 
 import com.sunil.datamodel.dto.ReviewDTO;
+import com.sunil.datamodel.exception.ControllableException;
 import com.sunil.datamodel.vo.ReviewRegisterVO;
 import com.sunil.model.Review;
 import com.sunil.repository.ReviewRepository;
@@ -24,7 +25,7 @@ public class ReviewService {
     public ReviewDTO reviewByReviewId(int reviewId) throws Exception {
         Optional<Review> searchedReview = this.reviewRepository.findById(reviewId);
 
-        return new ReviewDTO(searchedReview.orElseThrow(() -> new Exception("존재하지 않는 리뷰 아이디 입니다")));
+        return new ReviewDTO(searchedReview.orElseThrow(() -> new ControllableException("존재하지 않는 리뷰 아이디 입니다")));
     };
 
     public List<ReviewDTO> reviews() {

@@ -2,6 +2,7 @@ package com.sunil.service;
 
 import com.sunil.datamodel.dto.ProductDTO;
 import com.sunil.datamodel.dto.CategoryDTO;
+import com.sunil.datamodel.exception.ControllableException;
 import com.sunil.datamodel.vo.CategoryRegisterVO;
 import com.sunil.model.Category;
 import com.sunil.repository.CategoryRepository;
@@ -27,7 +28,7 @@ public class CategoryService {
     public CategoryDTO categoryById(int categoryId) throws Exception{
         Optional<Category> searchedCategory = this.categoryRepository.findById(categoryId);
 
-        return new CategoryDTO(searchedCategory.orElseThrow(() -> new Exception("존재하지 않는 카테고리 아이디입니다")));
+        return new CategoryDTO(searchedCategory.orElseThrow(() -> new ControllableException("존재하지 않는 카테고리 아이디입니다")));
     };
 
     public List<CategoryDTO> categories() {
